@@ -6,6 +6,8 @@
 
 # TOTALLY UNDER CONSTRUCTION
 
+![PROTOTYPE 1](https://github.com/provolot/GangGang/raw/master/MEDIA/example_addition.gif)
+
 ## Documentation
 
 Use https://github.com/saiprashanths/dl-docker
