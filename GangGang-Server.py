@@ -46,6 +46,15 @@ def process_data(data, socket):
     print data
     if type(data).__name__ == 'list':
         result = sum(data)
+
+    time.sleep(0.5)
+
+    print " "
+    print "the total is:", result
+    
+    time.sleep(0.5)
+    
+    print "SENDING: ", result
         
     socket.sendall(str(result))
 
@@ -55,7 +64,7 @@ def process_data(data, socket):
 if __name__ == "__main__":
 
     host = 'localhost'
-    port = 8079
+    port = 8089
 
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     serversocket.bind((host, port))
