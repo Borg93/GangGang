@@ -14,7 +14,8 @@ Spin up image (needs Keras & Python 2)
 * EC2 AMI - "Machine Learning - ami-4ed32123"
 * Maybe https://github.com/saiprashanths/dl-docker
 
-TODO:
+
+
 BACK BURNER:
 * make asynchronous
 * actually, quite possible that sockets is a horrible idea
