@@ -4,6 +4,7 @@
 
 
 from twisted.internet import reactor, protocol
+import time
 
 
 class Echo(protocol.Protocol):
@@ -11,6 +12,8 @@ class Echo(protocol.Protocol):
     
     def dataReceived(self, data):
         "As soon as any data is received, write it back."
+        self.transport.write("hnmmm\n")
+        time.sleep(4)
         self.transport.write(data)
 
 
