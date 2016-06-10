@@ -1,6 +1,7 @@
 import socket
 import pickle
 import time
+import numpy as np
 
 def recv_timeout(the_socket , timeout=1):
     the_socket.setblocking(0)
@@ -43,9 +44,16 @@ def recv_unpickle(socket, callback):
 
 def process_data(data, socket):
     print "RECEIVED!:"
-    print data
+
+    time.sleep(0.5)
+
+    print " "
+    print "TURNING INTO NUMPY ARRAY:"
+    npd = np.array(data)
+    print npd
+
     if type(data).__name__ == 'list':
-        result = sum(data)
+        result = np.sum(npd)
 
     time.sleep(0.5)
 
@@ -64,7 +72,7 @@ def process_data(data, socket):
 if __name__ == "__main__":
 
     host = 'localhost'
-    port = 8089
+    port = 8099
 
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     serversocket.bind((host, port))
