@@ -107,7 +107,7 @@ def sumsum(data):
     predict_index = np.argmax(classes)
 
     message =  "predicted:" + geometry[predict_index]
-    sendmessage += "\n"
+    sendmessage += "\n\n"
     sendmessage += "PREDICTED: " + geometry[predict_index]
 
     print message
@@ -119,7 +119,7 @@ def sumsum(data):
 if __name__ == "__main__":
 
     host = '172.16.15.1'
-    port = 9091
+    port = 9092
 
     listen_and_execute(host, port, sumsum)
 
