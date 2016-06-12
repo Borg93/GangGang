@@ -11,7 +11,8 @@
 ## NOTES FOR SELF
 
 Spin up image (needs Keras & Python 2)
-* EC2 AMI - "Machine Learning - ami-4ed32123"
+* ami-07f80f6a
+* http://notebook.madsenlab.org/project:coarse%20grained%20model/2016/01/24/neural-network-ami-for-ec2.html
 * Maybe https://github.com/saiprashanths/dl-docker
 
 
