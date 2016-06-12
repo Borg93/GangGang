@@ -37,7 +37,7 @@
           <items count="3">
             <item name="Date" type_name="gh_date" type_code="8">636013380826453352</item>
             <item name="Description" type_name="gh_string" type_code="10"></item>
-            <item name="Name" type_name="gh_string" type_code="10">gh_PYRO_client_test.ghx</item>
+            <item name="Name" type_name="gh_string" type_code="10">gh_PYRO_client_test__not_working.ghx</item>
           </items>
           <chunks count="3">
             <chunk name="Revisions">
@@ -339,7 +339,7 @@ platform.python_implementation = temp_impl
               </items>
               <chunks count="1">
                 <chunk name="Container">
-                  <items count="10">
+                  <items count="9">
                     <item name="CodeInput" type_name="gh_string" type_code="10">import sys
 
 for f in sys.path:
@@ -362,14 +362,18 @@ import serpent
 uri = "example.greeting"
 name = "bumpy"
 
+Pyro4.config.HOST = "172.16.15.1"
+
 #ns = Pyro4.locateNS(host="0.tcp.ngrok.io", port=12771)
-#ns = Pyro4.locateNS(host="172.16.15.1", port=9090)
+ns = Pyro4.locateNS(host="172.16.15.1")
+
+print ns
 
 
 
 #uri = ns.lookup(uri)
 
-uri = "PYRO:obj_6a8fcb1d9220426fae3370cb14e47db5@localhost:57433"
+uri = "PYRO:obj_5e07f6b6ab99486180cec8f8902b6878@172.16.15.1:58348"
 
 greeting_maker = Pyro4.Proxy(uri)         # get a Pyro proxy to the greeting object
 print(greeting_maker.get_fortune(name))   # call method normally
@@ -385,13 +389,12 @@ print( greeting_maker.get_numpy_mean(range(1000)) )   # call method normally
                       <Y>9</Y>
                     </item>
                     <item name="EditorSize" type_name="gh_drawing_size" type_code="32">
-                      <W>692</W>
-                      <H>692</H>
+                      <W>917</W>
+                      <H>803</H>
                     </item>
                     <item name="HideInput" type_name="gh_bool" type_code="1">true</item>
                     <item name="HideOutput" type_name="gh_bool" type_code="1">false</item>
                     <item name="InstanceGuid" type_name="gh_guid" type_code="9">991f15c0-c16f-4889-b7db-3b5619c69a81</item>
-                    <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                     <item name="Name" type_name="gh_string" type_code="10">Python Script</item>
                     <item name="NickName" type_name="gh_string" type_code="10">Python</item>
                   </items>
@@ -421,11 +424,10 @@ print( greeting_maker.get_numpy_mean(range(1000)) )   # call method normally
                       </items>
                       <chunks count="4">
                         <chunk name="InputParam" index="0">
-                          <items count="11">
+                          <items count="10">
                             <item name="AllowTreeAccess" type_name="gh_bool" type_code="1">true</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script variable Python</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">b7daef16-d7e5-42e2-8f51-cfe46d8b8bac</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Name" type_name="gh_string" type_code="10">x</item>
                             <item name="NickName" type_name="gh_string" type_code="10">x</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
@@ -452,11 +454,10 @@ print( greeting_maker.get_numpy_mean(range(1000)) )   # call method normally
                           </chunks>
                         </chunk>
                         <chunk name="InputParam" index="1">
-                          <items count="11">
+                          <items count="10">
                             <item name="AllowTreeAccess" type_name="gh_bool" type_code="1">true</item>
                             <item name="Description" type_name="gh_string" type_code="10">Script input y.</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">34e5da9b-8c00-4865-b48e-4ebbc0d8b5fe</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Name" type_name="gh_string" type_code="10">y</item>
                             <item name="NickName" type_name="gh_string" type_code="10">y</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">true</item>
@@ -483,10 +484,9 @@ print( greeting_maker.get_numpy_mean(range(1000)) )   # call method normally
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="0">
-                          <items count="7">
+                          <items count="6">
                             <item name="Description" type_name="gh_string" type_code="10">The execution information, as output and error streams</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">d938eaa1-d4ea-4c0b-a9ac-f665dfd76389</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Name" type_name="gh_string" type_code="10">out</item>
                             <item name="NickName" type_name="gh_string" type_code="10">out</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
@@ -510,10 +510,9 @@ print( greeting_maker.get_numpy_mean(range(1000)) )   # call method normally
                           </chunks>
                         </chunk>
                         <chunk name="OutputParam" index="1">
-                          <items count="7">
+                          <items count="6">
                             <item name="Description" type_name="gh_string" type_code="10">Script output a.</item>
                             <item name="InstanceGuid" type_name="gh_guid" type_code="9">0e11dcb7-1e38-4567-96fa-a0bc14b73d6d</item>
-                            <item name="Locked" type_name="gh_bool" type_code="1">true</item>
                             <item name="Name" type_name="gh_string" type_code="10">a</item>
                             <item name="NickName" type_name="gh_string" type_code="10">a</item>
                             <item name="Optional" type_name="gh_bool" type_code="1">false</item>
@@ -549,7 +548,7 @@ print( greeting_maker.get_numpy_mean(range(1000)) )   # call method normally
     <chunk name="Thumbnail">
       <items count="1">
         <item name="Thumbnail" type_name="gh_drawing_bitmap" type_code="37">
-          <bitmap length="2582">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</bitmap>
+          <bitmap length="1489">iVBORw0KGgoAAAANSUhEUgAAAJYAAABkCAIAAADrOV6nAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVmSURBVHhe7dpdTFNnHMfxU1AxgkCQKw0XxAu9M2LCdFOZzjnRZLsz2dxLsnizxUSJRhNjmMaEsJjNZImJcYnuBcWJcNpSCkWwWgZzU5QxX4H5nKfn9AWphdI3oGD3gMcsLJm2Zq35L79PHgg9p+3NN+ec5zkHCf4P4kDW3wlVIAgJyUNC8pCQPCQkDwnJQ0LykJA8JCQPCclDQvJmJdRUTd8MdMxK6NE3AiVISB4SkoeE5CEheUhIHhKSh4TkISF5SEgeEpKHhOTNSujGbW6CZiXUtwEpSEgeEpL3ChK6NE3Mm9zc6VK4i3MPd4qXYqO+G5KU1oQuVfM4nQOM3eDMofF2typGh8pvKuwhY2IXMr6E9CV0qypnSqfKzb5BOeg3hkdM4YAY4g951G8Z8l5zKk5FEW+DpKQpoThV9itK86BbDo00hgOW4PA/htgoh4ZbvRpDxSSlI6E4f4rzpHXIa5yMGsfDpomwdTJqjUWbJ6NNsekt+pgIy7GozeviiiI+on8YXiQtCRVx2dMaQoHGm9dbf+ls6bha09R42mw8YzbW2ZptXT/bOjvEaO3sMP/R0xAZdWhOMdnRPwwvkvKEHlXrVZgx6G+IBLqrquJ79/btqTheXV13rvZsTc2ZyspgRcXYgQOR/fvHd+/pOnFCnho3Dg/dYwy3ihKU8oRuzu0utWly/KuujvbVq2/Pm9deVPROefmXx45VHDq0q6yse+HC9vx8c17uwIIF5vLyb27/bomNiWmqmKDqXwHPldqEmqYxxpqGPLYnscPGhksrV97IymopKnp78+YvjhwRCT9bu/ZaXm5DXl59fv7DnJz6srIqe5t4c4vXJWanOAwTkdqEbk17wJjZ/8gaDV6IjrZt3OCbO+/y4sVvbtr09fHj+yorPyktZXl5fNEipaCAz51r3fFBQzxmEVNWn/dPxrDeT0SKE6rafcZM/qGmyKg8Hra/tVE1GFoKC7ds23by1KlPd+3aUVLSl5PzIDf3bm5uvyRd+vgjU/yJRSw8fIP9SJiY1CYUDUQJ8+PB5vHwj16XpWTlQ4PBUlBQumbNkaNHdx88+P6KFT1ZWbeys29nZ/cZDPXlW86FAk3RoDj3inWIOA/rXwT/LrUJRQHOmFjR2+KTB2t+MC5Z0mownM1ZuG79+qrq6s/37du5alVtRkZdVta9+fPvZ2R8v3z5YWujLT51yaNpiqJ/CzxXahMKYmIpppeNE5FvB+7LxcW9knR+zpwNW7eePH168/bt5UuXdktSd2ZmT2bmXUmqfa30u0G3eSx0zal4MCFNTMoT6pfDgM80NSGvKrkuSRclaV1R0RvFxa8vW/ZhYWGXJDkk6crM7/r33m2Mx80+74C4EGJdmJiUJxTEgdilcjkyWnent9Zhv+Cwn7/Sftbeds7eduHq5Z86rpyfGWLXxf57cjhwneMQTEI6EoqjSVP4ZbdqnBqzxiet8VjLs9Ecj4mXz8aUMRZxaNMPEXEAJi4dCQWX+FEUh+aUA49NYtkXGpn1pCI0/eBJHvGJg3WmHwomIU0JBXFtc3Nnr8LEbNPkfySP+o3BYVmMwGOx6mh3q3cY83A89U1a+hI+5Zk+qSoPGLvF2a9O5Teu9CisT0xeOMdjwpeT7oRPuWf+fUbMWabHzB0AfQck79UkhP8QEpKHhOQhIXlISB4SkoeE5CEheUhIHhKSh4TkISF5SEgeEpKHhOQhIXlISB4SkoeE5CEheUhIHhKSh4TkISF5SEgeEpKHhOQhIXlISB4SkoeE5CEheUhIHhKSh4TkISF5SEgeEpKHhOQhIXlISB4SkoeE5CEheUhIHhKSh4TkzUoIROkJgTBJ+gtXEZmHeXtslgAAAABJRU5ErkJggg==</bitmap>
         </item>
       </items>
     </chunk>
