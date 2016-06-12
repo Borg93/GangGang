@@ -22,6 +22,9 @@ datum = random.choice(all_data)
 predict_data = np.array([datum['data']])
 predict_label = datum['geometry']
 
+print predict_data
+print predict_data.shape
+ 
 ## LOAD MODULE
 
 model = model_from_json(open(ch.MODELDIR + ch.MODEL_ARCH_PREFIX + MODEL_SUFFIX + '.json').read())

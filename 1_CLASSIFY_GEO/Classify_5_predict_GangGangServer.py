@@ -66,11 +66,54 @@ def listen_and_execute(host, port, custom_function):
 
 
 def sumsum(data):
+    import Classify_helpers as ch
 
-    npd = np.array(data)
-    result = np.sum(npd)
-    print "the total is:", result
-    return result
+    import sys, os
+    import random
+
+    import numpy as np
+    from keras.preprocessing import image
+    from keras.models import model_from_json
+
+    MODEL_SUFFIX = "6poly_tetra_cone_cyl__e200_b16"
+    
+    ## LOAD DATA
+
+    geometry = ["6poly", "tetrahedra", "cone", "cylinder"]
+
+    predict_data = np.array([data])
+
+    print predict_data
+    print predict_data.shape
+    
+
+    ## LOAD MODULE
+
+    model = model_from_json(open(ch.MODELDIR + ch.MODEL_ARCH_PREFIX + MODEL_SUFFIX + '.json').read())
+    model.load_weights(ch.MODELDIR + ch.MODEL_WEIGHTS_PREFIX + MODEL_SUFFIX + '.h5')
+    model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+
+    ## PREDICT
+
+    classes = model.predict(predict_data)
+
+    ## REPRESENT
+    
+    sendmessage = ""
+
+    for g in zip(geometry, classes[0]):
+        sendmessage += ' '.join((g[0], ":", "{:.8f}%".format(g[1]) , "\n"))
+
+    predict_index = np.argmax(classes)
+
+    message =  "predicted:" + geometry[predict_index]
+    sendmessage += "\n"
+    sendmessage += "PREDICTED: " + geometry[predict_index]
+
+    print message
+    os.system("say " + message)
+
+    return sendmessage
 
 
 if __name__ == "__main__":
