@@ -36,6 +36,10 @@ score = model.evaluate(test_data_np, test_labels_np)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
 
+classes = model.predict(classify_data_np)
+
+print classes
+
 """
 classes = model.predict(imgarr)
 chance = classes[0][0]
