@@ -20,3 +20,15 @@ Spin up image (needs Keras & Python 2)
 BACK BURNER:
 * make asynchronous
 * actually, quite possible that sockets is a horrible idea
+
+
+FUCK PIP
+add C:\Program Files (x86)\IronPython 2.7\Lib\site-packages in \_EditPythonScript
+
+
+PIP INSTALL
+ & 'C:\Program Files (x86)\IronPython 2.7\ipy.exe' -X:Frames -m ensurepip
+ & 'C:\Program Files (x86)\IronPython 2.7\ipy.exe' -X:Frames -m pip install Pyro4
+kk
+
+Add C:\Program Files (x86)\IronPython 2.7\Lib to path in EditPythonScript
