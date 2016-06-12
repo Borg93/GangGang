@@ -20,47 +20,12 @@ if len(sys.argv) < 2:
 MODEL_SUFFIX = sys.argv[1]
 
 
-def split_data(data, split_ratio=0.2):
-
-    split_index = int(len(data) * split_ratio)
-    training_data = data[split_index:]
-    test_data = data[:split_index]
-
-    return (training_data, test_data)
-    
-
-def load_training_data(geometry):
-    filepaths = [ str(ch.DATADIR + f + ".json") for f in geometry ]
-
-    all_data = []
-
-    for index in xrange(len(geometry)):
-
-        filename = filepaths[index]
-        geo = geometry[index]
-
-        label = [0] * len(geometry)
-        label[index] = 1
-
-        with open(filename) as fp:
-            data = json.load(fp)
-            for datum in data:
-                datum.update({'geometry':geo, 'label':label})
-
-        
-        all_data.extend(data)
-
-    random.shuffle(all_data)
-
-    return all_data
-
 
 def save_model_to_file(model, MODEL_SUFFIX):
 
     json_string = model.to_json()
-    open(ch.MODELDIR + 'model_architecture__' + MODEL_SUFFIX + '.json', 'w').write(json_string)
-    model.save_weights(ch.MODELDIR + 'model_weights__' + MODEL_SUFFIX + '.h5')
-
+    open(ch.MODELDIR + ch.MODEL_ARCH_PREFIX + MODEL_SUFFIX + '.json', 'w').write(json_string)
+    model.save_weights(ch.MODELDIR + ch.MODEL_WEIGHTS_PREFIX + MODEL_SUFFIX + '.h5')
 
 
 def makeCNN():
@@ -118,9 +83,9 @@ if __name__ == '__main__':
 
     geometry = ["6poly", "tetrahedra", "cone", "cylinder"]
 
-    all_data = load_training_data(geometry)
+    all_data = ch.load_training_data(geometry)
 
-    (training_data, test_data) = split_data(all_data, 0.2)
+    (training_data, test_data) = ch.split_data(all_data, 0.2)
 
     training_data_np = np.array(map(lambda x: x['data'], training_data))
     training_labels_np = np.array(map(lambda x: x['label'], training_data))
@@ -140,7 +105,7 @@ if __name__ == '__main__':
     print("begin to train")
 
     history = model.fit(training_data_np, training_labels_np,
-            nb_epoch = 200, 
+            nb_epoch = 300, 
             batch_size= 16, 
             verbose= 2, 
             validation_split=0.2,
@@ -155,6 +120,6 @@ if __name__ == '__main__':
 
     print ("saving model to file..")
 
-    save_model_to_file(model, MODEL_SUFFIX)
+    ch.save_model_to_file(model, MODEL_SUFFIX)
 
 

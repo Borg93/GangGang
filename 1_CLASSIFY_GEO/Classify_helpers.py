@@ -1,18 +1,44 @@
 DATADIR = "TRAINING/"
 MODELDIR = "MODELS/"
 
+MODEL_ARCH_PREFIX = 'model_architecture__'
+MODEL_WEIGHTS_PREFIX = 'model_weights__'
 
-def _load_and_process_gh_json(filename, index):
+
+def load_training_data(geometry):
+
     import json
-    import os
+    import random
 
-    filebase = os.path.splitext(os.path.basename(filename))[0]
+    filepaths = [ str(DATADIR + f + ".json") for f in geometry ]
 
-    with open(filename) as fp:
-        data = json.load(fp)
+    all_data = []
 
-        for d in data:
-            d.update({'geometry':filebase})
-    
-        return data
+    for index in xrange(len(geometry)):
 
+        filename = filepaths[index]
+        geo = geometry[index]
+
+        label = [0] * len(geometry)
+        label[index] = 1
+
+        with open(filename) as fp:
+            data = json.load(fp)
+            for datum in data:
+                datum.update({'geometry':geo, 'label':label})
+
+        
+        all_data.extend(data)
+
+    random.shuffle(all_data)
+
+    return all_data
+
+def split_data(data, split_ratio=0.2):
+
+    split_index = int(len(data) * split_ratio)
+    training_data = data[split_index:]
+    test_data = data[:split_index]
+
+    return (training_data, test_data)
+ 
