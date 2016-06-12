@@ -116,7 +116,7 @@ def makeNormal():
 
 if __name__ == '__main__':
 
-    geometry = ["box", "tetrahedra", "cone"]
+    geometry = ["6poly", "tetrahedra", "cone", "cylinder"]
 
     all_data = load_training_data(geometry)
 
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     print("begin to train")
 
     history = model.fit(training_data_np, training_labels_np,
-            nb_epoch = 100, 
+            nb_epoch = 200, 
             batch_size= 16, 
             verbose= 2, 
             validation_split=0.2,
