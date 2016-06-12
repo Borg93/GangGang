@@ -71,6 +71,7 @@ def makeNormal():
 
     model.add(Dense(50, init = 'uniform'))
     model.add(Activation("tanh"))
+    model.add(Dropout(0.5))
 
     model.add(Dense(len(geometry)))
     model.add(Activation("softmax"))
@@ -105,7 +106,7 @@ if __name__ == '__main__':
     print("begin to train")
 
     history = model.fit(training_data_np, training_labels_np,
-            nb_epoch = 300, 
+            nb_epoch = 200, 
             batch_size= 16, 
             verbose= 2, 
             validation_split=0.2,
@@ -120,6 +121,6 @@ if __name__ == '__main__':
 
     print ("saving model to file..")
 
-    ch.save_model_to_file(model, MODEL_SUFFIX)
+    save_model_to_file(model, MODEL_SUFFIX)
 
 

@@ -1,0 +1,8 @@
+100 epoch
+    geometry = ["box", "tetrahedra", "cone"]
+('Test score:', 0.039519641545142196)
+('Test accuracy:', 0.995)
+
+python -i Classify_3_train_model.py 6poly_tetra_cone_cyl__e200_b16
+('Test score:', 0.15076955044740434)
+('Test accuracy:', 0.96682750301568154)
