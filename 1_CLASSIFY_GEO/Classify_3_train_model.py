@@ -140,7 +140,7 @@ if __name__ == '__main__':
     print("begin to train")
 
     history = model.fit(training_data_np, training_labels_np,
-            nb_epoch = 10, 
+            nb_epoch = 100, 
             batch_size= 16, 
             verbose= 2, 
             validation_split=0.2,
