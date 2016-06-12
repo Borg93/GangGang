@@ -20,38 +20,48 @@ if len(sys.argv) < 2:
 MODEL_SUFFIX = sys.argv[1]
 
 
-######### get training data
+def split_data(data, split_ratio=0.2):
 
-geometry = ["box", "tetrahedra"]
+    split_index = int(len(data) * split_ratio)
+    training_data = data[split_index:]
+    test_data = data[:split_index]
 
-filepaths = [ str(ch.DATADIR + f + ".json") for f in geometry ]
-
-all_data = []
-
-for index in xrange(len(geometry)):
-
-    filename = filepaths[index]
-    geo = geometry[index]
-
-    label = [0] * len(geometry)
-    label[index] = 1
-
-    with open(filename) as fp:
-        data = json.load(fp)
-        for datum in data:
-            datum.update({'geometry':geo, 'label':label})
-
+    return (training_data, test_data)
     
-    all_data.extend(data)
+
+def load_training_data(geometry):
+    filepaths = [ str(ch.DATADIR + f + ".json") for f in geometry ]
+
+    all_data = []
+
+    for index in xrange(len(geometry)):
+
+        filename = filepaths[index]
+        geo = geometry[index]
+
+        label = [0] * len(geometry)
+        label[index] = 1
+
+        with open(filename) as fp:
+            data = json.load(fp)
+            for datum in data:
+                datum.update({'geometry':geo, 'label':label})
+
+        
+        all_data.extend(data)
+
+    random.shuffle(all_data)
+
+    return all_data
 
 
-random.shuffle(all_data)
+def save_model_to_file(model, MODEL_SUFFIX):
 
-training_data = np.array(map(lambda x: x['data'], all_data))
-training_labels = np.array(map(lambda x: x['label'], all_data))
+    json_string = model.to_json()
+    open(ch.MODELDIR + 'model_architecture__' + MODEL_SUFFIX + '.json', 'w').write(json_string)
+    model.save_weights(ch.MODELDIR + 'model_weights__' + MODEL_SUFFIX + '.h5')
 
 
-######## sMODEL
 
 def makeCNN():
     model = Sequential()
@@ -96,38 +106,55 @@ def makeNormal():
 
     model.add(Dense(50, init = 'uniform'))
     model.add(Activation("tanh"))
-    model.add(Dropout(0.25))
 
     model.add(Dense(len(geometry)))
     model.add(Activation("softmax"))
     return model
 
-model = makeNormal()
+#####################
+#####################
 
-sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
+if __name__ == '__main__':
 
-#model.compile(loss='mse', optimizer=sgd, metrics=['accuracy'])
-#model.compile(loss='mse', optimizer='sgd', metrics=['accuracy'])
-#model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
-model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+    geometry = ["box", "tetrahedra", "cone"]
 
-print("begin to train")
+    all_data = load_training_data(geometry)
 
-history = model.fit(training_data, training_labels,
-        nb_epoch = 1000, 
-        batch_size= 16, 
-        verbose= 2, 
-        validation_split=0.2,
-        shuffle=True)
+    (training_data, test_data) = split_data(all_data, 0.2)
 
-####### SAVING
+    training_data_np = np.array(map(lambda x: x['data'], training_data))
+    training_labels_np = np.array(map(lambda x: x['label'], training_data))
 
-print ("saving model to file..")
+    test_data_np = np.array(map(lambda x: x['data'], test_data))
+    test_labels_np = np.array(map(lambda x: x['label'], test_data))
 
-json_string = model.to_json()
-open(ch.MODELDIR + 'model_architecture__' + MODEL_SUFFIX + '.json', 'w').write(json_string)
-model.save_weights(ch.MODELDIR + 'model_weights__' + MODEL_SUFFIX + '.h5')
+    model = makeNormal()
 
+    sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
 
+    #model.compile(loss='mse', optimizer=sgd, metrics=['accuracy'])
+    #model.compile(loss='mse', optimizer='sgd', metrics=['accuracy'])
+    #model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+
+    print("begin to train")
+
+    history = model.fit(training_data_np, training_labels_np,
+            nb_epoch = 10, 
+            batch_size= 16, 
+            verbose= 2, 
+            validation_split=0.2,
+            shuffle=True)
+
+    score = model.evaluate(test_data_np, test_labels_np)
+   
+    print('Test score:', score[0])
+    print('Test accuracy:', score[1])
+
+    ####### SAVING
+
+    print ("saving model to file..")
+
+    save_model_to_file(model, MODEL_SUFFIX)
 
 
