@@ -71,8 +71,8 @@ def process_data(data, socket):
 
 if __name__ == "__main__":
 
-    host = 'localhost'
-    port = 8099
+    host = '172.16.15.1'
+    port = 9090
 
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     serversocket.bind((host, port))
