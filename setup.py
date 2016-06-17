@@ -1,7 +1,6 @@
 from distutils.core import setup
 setup(
   name = 'GangGang',
-  packages = ['GangGang'], # this must be the same as the name above
   version = '0.1',
   description = 'A library to use a remote server to execute code, mainly for GhPython in Grasshopper3D.',
   author = 'Dan Taeyoung',
