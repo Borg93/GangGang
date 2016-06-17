@@ -7,6 +7,14 @@ This allows us to work around the lack of easy module installation in IronPython
 
 While there are much more robust libraries like [Pyro4](https://github.com/irmen/Pyro4/), installation on the Grasshopper/IronPython end is difficult. GangGang allows us to get around this process by allowing the module to be imported easily, or even concatenated directly before GhPython code.
 
+### Installation
+
+```
+pip install GangGang
+```
+
+For Grasshopper scripts, drop GangGang.py in the same file as the *.gh(x) file.
+
 ### GangGang.server
 
 A server (ideally, the computer running 'normal' Python) is instantiated by:
@@ -33,7 +41,7 @@ This client sends data, waits for a response, and returns the result.
 
 See example_python.py or Python example usage.
 
-See below or example_gh3d.ghx for example usage. GangGang.py should be in the same file as *.gh(x) file.
+See below or example_gh3d.ghx for example usage. 
 
 ![Example Gh3d](https://raw.githubusercontent.com/provolot/GangGang/master/example_gh3d.png)
 
