@@ -1,17 +1,13 @@
 import socket
 import pickle
-import time
-import numpy as np
 import sys
+import time
 
 def recv_timeout( the_socket , timeout=1): # implements recvall
     the_socket.setblocking(0)
-     
     total_data=[]
     data=''
-     
     begin = time.time()
-
     while True:
         #if you got some data, then break after timeout
         if total_data and time.time() - begin > timeout:
@@ -43,12 +39,9 @@ def recieve_and_unpickle( socket):
             return None
 
 def process_data(data, socket, custom_function):
-
     if type(data).__name__ != 'list':
         raise TypeError('data is not a list!') 
-
     result = custom_function(data)
-
     return result
 
 def return_data(result, socket):
@@ -57,22 +50,19 @@ def return_data(result, socket):
 def server(host, port, custom_function):
     # listen and execute
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#    serversocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    serversocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     serversocket.bind((host, port))
     serversocket.listen(5) # become a server socket, maximum 5 connections
 
     while True:
-
         try:
             conn, addr = serversocket.accept()
             data = recieve_and_unpickle(conn)
             result = process_data(data, conn, custom_function)
             return_data(result, conn)
-
         except Exception, e:
             print e
             break;
-
     serversocket.close()
 
 def client(host, port, data):
@@ -84,42 +74,10 @@ def client(host, port, data):
         print e
         
     pickle_data = pickle.dumps(data, 0)
-
     clientsocket.send(pickle_data)
-   
     # synchronous
-
     recv_data = recv_timeout(clientsocket)
-
     clientsocket.close()
-
     return recv_data
-
-############
-############
-############
-
-
-def echo(data):
-    print "I received", data
-    return data
-
-if __name__ == "__main__":
-
-    ## EXAMPLE
-    if len(sys.argv) < 2:
-        print "give 'client' or 'server' as argument"
-        exit(0)
-
-    host = 'localhost'
-    port = 9998
-
-    if sys.argv[1] == "server":
-        server(host, port, echo)
-
-    if sys.argv[1] == "client":
-        data = range(10)
-        client(host, data, echo)
-
 
 
