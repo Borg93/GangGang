@@ -1,6 +1,6 @@
 # GangGang 
 ## [강강술래 / Ganggangsullae](https://en.wikipedia.org/wiki/Ganggangsullae)
-![GangGang](http://i.imgur.com/h6BLLLE.jpg)
+![GangGang](https://raw.githubusercontent.com/provolot/GangGang/master/ganggangsullae.jpg)
 
 GangGang is a simple single-file module to use a remote server to execute code, mainly for GhPython/IronPython in Grasshopper3D.
 This allows us to work around the lack of easy module installation in IronPython -- allowing, for example, Numpy, Scipy, Keras, etc. to be used.
@@ -31,7 +31,7 @@ This client sends data, waits for a response, and returns the result.
 
 ### Example
 
-See example_python.py for example usage.
-
-
+See example_python.py or Python example usage.
+See below or example_gh3d.ghx for example usage.
+![Example Gh3d](https://raw.githubusercontent.com/provolot/GangGang/master/example_gh3d.png)
 
