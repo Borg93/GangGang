@@ -10,19 +10,23 @@ While there are much more robust libraries like [Pyro4](https://github.com/irmen
 ### GangGang.server
 
 A server (ideally, the computer running 'normal' Python) is instantiated by:
-```def callback(data):
+```
+def callback(data):
     # do something with the data here
     print data
     return data
 
-GangGang.server(host, port, callback)```
+GangGang.server(host, port, callback)
+```
 This server listens, processes data, and returns the result to the client.
 The 'callback' function will be passed a single argument -- the data recieved from the client.
 
 ### GangGang.client
 
 A client request is executed by:
-```result = GangGang.client(host, port, data)```
+```
+result = GangGang.client(host, port, data)
+```
 This client sends data, waits for a response, and returns the result.
 
 ### Example
