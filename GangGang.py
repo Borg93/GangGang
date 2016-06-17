@@ -3,7 +3,7 @@ import pickle
 import sys
 import time
 
-def recv_timeout( the_socket , timeout=1): # implements recvall
+def recv_timeout( the_socket , timeout=1): # implements recvall, from http://www.binarytides.com/receive-full-data-with-the-recv-socket-function-in-python/
     the_socket.setblocking(0)
     total_data=[]
     data=''
