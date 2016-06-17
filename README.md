@@ -33,7 +33,7 @@ This client sends data, waits for a response, and returns the result.
 
 See example_python.py or Python example usage.
 
-See below or example_gh3d.ghx for example usage.
+See below or example_gh3d.ghx for example usage. GangGang.py should be in the same file as *.gh(x) file.
 
 ![Example Gh3d](https://raw.githubusercontent.com/provolot/GangGang/master/example_gh3d.png)
 
