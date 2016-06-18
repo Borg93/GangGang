@@ -45,7 +45,8 @@ def process_data(data, socket, custom_function):
     return result
 
 def return_data(result, socket):
-    socket.sendall(str(result))
+    pickle_result = pickle.dumps(result, 0)
+    socket.sendall(str(pickle_result))
 
 def server(host, port, custom_function):
     # listen and execute
@@ -76,7 +77,7 @@ def client(host, port, data):
     pickle_data = pickle.dumps(data, 0)
     clientsocket.send(pickle_data)
     # synchronous
-    recv_data = recv_timeout(clientsocket)
+    recv_data = recieve_and_unpickle(clientsocket)
     clientsocket.close()
     return recv_data
 
