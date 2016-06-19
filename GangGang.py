@@ -82,3 +82,47 @@ def client(host, port, data):
     return recv_data
 
 
+def cloudpickle_server(host, port):
+    import cloudpickle
+    # listen and execute
+    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    serversocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    serversocket.bind((host, port))
+    serversocket.listen(5) # become a server socket, maximum 5 connections
+
+    while True:
+        try:
+            conn, addr = serversocket.accept()
+            data_pickled, func_pickled = recieve_and_unpickle(conn)
+            data = pickle.loads(data_pickled)
+            func = cloudpickle.loads(func_pickled)
+
+            result = process_data(data, conn, func)
+            return_data(result, conn)
+        except Exception, e:
+            print e
+            break;
+    serversocket.close()
+
+
+def cloudpickle_client(host, port, data, func):
+    import cloudpickle
+    # send and recieve
+    clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        clientsocket.connect((host, port))
+    except Exception, e:
+        print e
+        
+    pickle_data = pickle.dumps(data, 0)
+    pickle_func = cloudpickle.dumps(func)
+
+    pickle_d_f = pickle.dumps((pickle_data, pickle_func))
+
+    clientsocket.send(pickle_d_f)
+    # synchronous
+    recv_data = recieve_and_unpickle(clientsocket)
+    clientsocket.close()
+    return recv_data
+
+
