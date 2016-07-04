@@ -1,5 +1,5 @@
 # GangGang 
-![GangGang](https://raw.githubusercontent.com/provolot/GangGang/master/ganggangsullae.jpg)
+![GangGang](https://raw.githubusercontent.com/provolot/GangGang/master/MEDIA/ganggangsullae.jpg)
 
 [*강강술래 / Ganggangsullae*](https://en.wikipedia.org/wiki/Ganggangsullae)
 
