@@ -15,7 +15,7 @@ While there are much more robust libraries like [Pyro4](https://github.com/irmen
 pip install GangGang
 ```
 
-For Grasshopper scripts, drop GangGang.py in the same file as the *.gh(x) file.
+For Grasshopper scripts, drop GangGang.py in the same directory that the *.gh(x) file is in.
 
 ### GangGang.server
 
