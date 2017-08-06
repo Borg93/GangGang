@@ -1,5 +1,6 @@
 # GangGang 
 ![GangGang](https://github.com/dantaeyoung/GangGang/blob/master/MEDIA/ganggangsullae.jpg)
+
 [*강강술래 / Ganggangsullae*](https://en.wikipedia.org/wiki/Ganggangsullae)
 
 ![ganggang_example.gif](https://github.com/dantaeyoung/GangGang/blob/master/MEDIA/ganggang_example.gif)
