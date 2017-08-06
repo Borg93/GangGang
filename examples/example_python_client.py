@@ -1,10 +1,9 @@
 import GangGang
-import sys
 
 host = 'localhost'
 port = 9998
 
-data = range(10)
+data = range(100)
 
 print("I sent to the server: ", data)
 

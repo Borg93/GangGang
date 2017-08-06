@@ -1,5 +1,4 @@
 import GangGang
-import sys
 
 ## EXAMPLE
 def sumdata(data):

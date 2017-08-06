@@ -1,6 +1,5 @@
 import socket
 import pickle
-import sys
 import time
 
 def recv_timeout( the_socket , timeout=1): # implements recvall, from http://www.binarytides.com/receive-full-data-with-the-recv-socket-function-in-python/
@@ -35,7 +34,7 @@ def recieve_and_unpickle( socket):
     if len(rawdata) > 0:
         try:
             return pickle.loads(rawdata)
-        except EOFError, e:
+        except EOFError:
             return None
 
 def process_data(data, socket, custom_function):
